@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+</head>
+<body>
+    <div> 
+        <input type="text" placeholder="Enter city name.." id="input" > 
+        <input type="button" value="Submit" id="btn" > 
+     
+        <div> 
+            <div id="city"></div> 
+            <div id="temp"></div> 
+            <div id="info"></div> 
+            <div id="wind"></div> 
+        </div> 
+     
+    </div> 
+     
+    <script> 
+     
+        const a1=document.querySelector("#input") 
+        const a2=document.querySelector("#btn") 
+        const a3=document.querySelector("#city") 
+        const a4=document.querySelector("#temp") 
+        const a5=document.querySelector("#info") 
+        const a6=document.querySelector("#wind") 
+     
+        function convert(value){ 
+            return (value-273) 
+     
+        } 
+     
+        a2.addEventListener("click",()=>{ 
+     
+     
+    let apik="2ed8607def4a58f643118d30e6c63e91"
+     
+     
+            fetch('https://api.openweathermap.org/data/2.5/weather?q='+a1.value+'&appid='+apik) 
+      .then(response => response.json()) 
+      .then(data => { 
+        var city=data['name'] 
+        a3.innerHTML=`weather of ${city}` 
+        var temperatre=data['main']['temp'] 
+        a4.innerHTML=`Temparature : ${Math.round(convert(temperatre))} °c` 
+        var information=data['weather']['0']['description'] 
+        a5.innerHTML=`Sky Conditions: ${information}` 
+        var windspeed =data['wind']['speed'] 
+        a6.innerHTML=`Wind speed: ${windspeed} km/h ` 
+     
+     
+      }) 
+        }) 
+     
+     
+     
+     
+     
+     
+    </script> 
+</body>
+</html>
